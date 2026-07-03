@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: oklch(1 0 0);
+  --color-ink: oklch(0.22 0.02 140);
+  --color-primary: oklch(0.45 0.11 145);
+  --color-primary-strong: oklch(0.38 0.1 145);
+  --color-primary-soft: oklch(0.95 0.03 145);
+  --color-muted: oklch(0.5 0.02 140);
+  --color-line: oklch(0.9 0.01 140);
+  --color-amber: oklch(0.65 0.13 75);
+  --color-amber-soft: oklch(0.96 0.04 85);
+  --color-red: oklch(0.55 0.19 25);
+  --color-red-soft: oklch(0.96 0.02 25);
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+body {
+  @apply bg-bg text-ink font-sans antialiased;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* Route content entrance */
+.page-enter {
+  animation: page-rise 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes page-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Newest delivery-feed row */
+.feed-new {
+  animation: feed-flash 900ms ease-out both;
+}
+@keyframes feed-flash {
+  from {
+    background-color: var(--color-primary-soft);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .feed-new {
+    animation: none;
+  }
+}

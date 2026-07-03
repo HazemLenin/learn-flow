@@ -40,8 +40,12 @@ A scoped-down e-learning platform built to demonstrate **NestJS microservices co
 ```bash
 npm ci
 docker compose up -d          # RabbitMQ (+ mgmt UI :15672), MongoDB, PostgreSQL
-npx nx run-many -t serve -p catalog enrollment notification
+npx nx run-many -t serve -p catalog enrollment notification frontend
 ```
+
+Frontend: [http://localhost:4200](http://localhost:4200) — browse courses, buy one
+(with an optional simulated decline), publish a lesson, and watch the **delivery
+feed** show the notification fan-out live.
 
 Swagger: [catalog](http://localhost:3001/api/docs) · [enrollment](http://localhost:3002/api/docs) · [notification](http://localhost:3003/api/docs)
 
@@ -72,9 +76,11 @@ curl localhost:3003/api/notifications
 
 ```bash
 npx nx run-many -t test       # unit tests across all services
+npx nx e2e frontend-e2e       # Playwright, needs docker + all 3 services running
 ```
 
-Covered: payment success/failure and 409-duplicate logic, idempotent event handling, ack/nack behavior, retry backoff timing, single-instructor-summary guarantee.
+Unit tests cover: payment success/failure and 409-duplicate logic, idempotent event handling, ack/nack behavior, retry backoff timing, single-instructor-summary guarantee.
+Playwright drives the real stack end-to-end: browsing, buying (success, decline, duplicate, retry), publishing a lesson, and the delivery feed showing retries plus the instructor summary.
 
 ## Repo layout
 
@@ -83,6 +89,8 @@ apps/
   catalog/        NestJS + Mongoose  — courses, lessons, both event ends
   enrollment/     NestJS + TypeORM   — enrollments, mock payments
   notification/   NestJS             — email fan-out, retry, failure log
+  frontend/       React + Vite + Tailwind — 4 screens incl. the delivery feed
+  frontend-e2e/   Playwright         — full-stack end-to-end suite
 libs/
   contracts/      shared event payloads, queue names, demo identities
 ```
