@@ -23,9 +23,16 @@ npm-debug.log*
 !.vscode/extensions.json
 .idea/
 
+# Local tooling
+.codegraph/
+.claude/
+.impeccable/
+
 # OS
 .DS_Store
 Thumbs.db
 
 # Test coverage
 coverage/
+
+test-output

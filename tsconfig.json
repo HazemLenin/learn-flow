@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/catalog"
+    },
+    {
+      "path": "./apps/enrollment"
+    },
+    {
+      "path": "./apps/notification"
+    },
+    {
+      "path": "./libs/contracts"
+    }
+  ]
+}
