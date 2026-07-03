@@ -36,3 +36,5 @@ Thumbs.db
 coverage/
 
 test-output
+
+vite.config.*.timestamp*

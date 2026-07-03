@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import { HydratedDocument, SchemaTypes, Types } from 'mongoose';
 
 export type LessonDocument = HydratedDocument<Lesson>;
 
@@ -14,7 +14,7 @@ export class Lesson {
   @Prop()
   videoUrl?: string;
 
-  @Prop({ type: Types.ObjectId, ref: 'Course', required: true, index: true })
+  @Prop({ type: SchemaTypes.ObjectId, ref: 'Course', required: true, index: true })
   courseId!: Types.ObjectId;
 
   @Prop({ required: true, min: 0 })
