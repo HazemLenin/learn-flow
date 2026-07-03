@@ -1,0 +1,1 @@
+export const CATALOG_CLIENT = 'CATALOG_CLIENT';
