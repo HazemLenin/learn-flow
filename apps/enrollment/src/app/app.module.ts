@@ -11,7 +11,7 @@ import { Payment } from '../enrollments/entities/payment.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST ?? 'localhost',
-      port: Number(process.env.POSTGRES_PORT ?? 5432),
+      port: Number(process.env.POSTGRES_PORT ?? 5433),
       username: process.env.POSTGRES_USER ?? 'learnflow',
       password: process.env.POSTGRES_PASSWORD ?? 'learnflow',
       database: process.env.POSTGRES_DB ?? 'enrollment',
