@@ -2,7 +2,12 @@
   "name": "learn-flow",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "docker compose up -d && nx run-many -t serve -p catalog enrollment notification frontend",
+    "dev:backend": "docker compose up -d && nx run-many -t serve -p catalog enrollment notification",
+    "test": "nx run-many -t test",
+    "e2e": "nx e2e frontend-e2e"
+  },
   "private": true,
   "devDependencies": {
     "@eslint/js": "^9.8.0",
