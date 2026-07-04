@@ -4,6 +4,8 @@
 
 A scoped-down e-learning platform built to demonstrate **NestJS microservices communicating over RabbitMQ**, with independent data stores per service, in an Nx monorepo.
 
+![Demo: buying a course, publishing a lesson, and watching the notification fan-out with retries land in the delivery feed](docs/demo.gif)
+
 ![NestJS](https://img.shields.io/badge/NestJS-11-e0234e?logo=nestjs) ![RabbitMQ](https://img.shields.io/badge/RabbitMQ-4-ff6600?logo=rabbitmq) ![MongoDB](https://img.shields.io/badge/MongoDB-8-47a248?logo=mongodb) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169e1?logo=postgresql) ![Nx](https://img.shields.io/badge/Nx-23-143055?logo=nx)
 
 ## Architecture
@@ -39,8 +41,7 @@ A scoped-down e-learning platform built to demonstrate **NestJS microservices co
 
 ```bash
 npm ci
-docker compose up -d          # RabbitMQ (+ mgmt UI :15672), MongoDB, PostgreSQL
-npx nx run-many -t serve -p catalog enrollment notification frontend
+npm run dev    # docker compose up + all three services + frontend
 ```
 
 Frontend: [http://localhost:4200](http://localhost:4200) — browse courses, buy one
