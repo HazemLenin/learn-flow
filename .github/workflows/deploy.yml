@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+    branches: [release]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            set -e
+            cd /home/ubuntu/learn-flow
+            git fetch origin release
+            git reset --hard origin/release
+            npm ci
+            npx nx run-many -t build -p catalog enrollment notification frontend
+            pm2 describe catalog > /dev/null 2>&1 && pm2 restart catalog || pm2 start dist/apps/catalog/main.js --name catalog
+            pm2 describe enrollment > /dev/null 2>&1 && pm2 restart enrollment || pm2 start dist/apps/enrollment/main.js --name enrollment
+            pm2 describe notification > /dev/null 2>&1 && pm2 restart notification || pm2 start dist/apps/notification/main.js --name notification
+            pm2 save
